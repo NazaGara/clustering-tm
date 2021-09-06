@@ -20,10 +20,6 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
@@ -36,7 +32,7 @@
     <img src="images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">clustering</h3>
+  <h3 align="center">Clustering - Text Mining 21</h3>
 
   <p align="center">
     project_description
@@ -44,9 +40,7 @@
     <a href="https://github.com/NazaGara/clustering-tm"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/NazaGara/clustering-tm">View Demo</a>
-    ·
-    <a href="https://github.com/NazaGara/clustering-tm/issues">Report Bug</a>
+    <a href="https://github.com/NazaGara/clustering-tm">Demo</a>
     ·
     <a href="https://github.com/NazaGara/clustering-tm/issues">Request Feature</a>
   </p>
@@ -71,7 +65,7 @@
     <li><a href="#uso">Uso</a></li>
     <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
+    <li><a href="#agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
 
@@ -113,9 +107,7 @@ pip3 install -r requirements.txt
 <!-- USAGE EXAMPLES -->
 ## Uso
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+<!--Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
 
 
 <!-- LICENSE -->
@@ -147,15 +139,7 @@ Project Link: [https://github.com/NazaGara/clustering-tm](https://github.com/Naz
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/NazaGara/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/NazaGara/clustering-tm/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/NazaGara/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/NazaGara/clustering-tm/network/members
-[stars-shield]: https://img.shields.io/github/stars/NazaGara/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/NazaGara/clustering-tm/stargazers
-[issues-shield]: https://img.shields.io/github/issues/NazaGara/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/NazaGara/clustering-tm/issues
 [license-shield]: https://img.shields.io/github/license/NazaGara/repo.svg?style=for-the-badge
-[license-url]: https://github.com/NazaGara/clustering-tm/blob/master/LICENSE.txt
+[license-url]: https://github.com/NazaGara/clustering-tm/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/NazaGara
+[linkedin-url]: https://linkedin.com/in/nazareno-garagiola/
