@@ -81,8 +81,13 @@ jupyter-notebook clustering.ipynb
 ## Metodologia
 
 La forma de realizarlo fue ... WIP
+### Preproceso
 
+### Clustering
 
+### Obtenido vs Esperado
+
+### Métricas
 
 ## Licencia
 
