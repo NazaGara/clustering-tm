@@ -20,30 +20,16 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![MIT License][license-shield]][license-url]
+
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
 <!-- PROJECT LOGO -->
 <br />
-<p align="center">
-  <a href="https://github.com/NazaGara/clustering-tm">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">Clustering - Text Mining 21</h3>
-
   <p align="center">
-    project_description
-    <br />
-    <a href="https://github.com/NazaGara/clustering-tm"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/NazaGara/clustering-tm">Demo</a>
-    ·
-    <a href="https://github.com/NazaGara/clustering-tm/issues">Request Feature</a>
-  </p>
+    <h1 align="center"> Clustering - Text Mining 2021</h1>
+    <h3 align="center"> Garagiola, Nazareno </h3>
 </p>
 
 
@@ -52,93 +38,68 @@
 <details open="open">
   <summary><h2 style="display: inline-block">Tabla de contenidos</h2></summary>
   <ol>
-    <li>
-      <a href="#about-the-project">Proyecto 1: Clustering</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#instalacion">Instalacion</a></li>
-        <li><a href="#requisitos">Requisitos</a></li>
-      </ul>
-    </li>
+    <li><a href="#about-the-project">Proyecto 1: Clustering</a></li>
+    <li><a href="#instalacion">Instalacion</a></li>
+    <li><a href="#requisitos">Requisitos</a></li>
     <li><a href="#uso">Uso</a></li>
+    <li><a href="#metodologia">Metodologia</a></li>
     <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
-    <li><a href="#agradecimientos">Agradecimientos</a></li>
   </ol>
 </details>
 
 
 
-<!-- ABOUT THE PROJECT -->
 ## Proyecto 1: Clustering
 
 Perteneciente a la materia Mineria de texto 2021 de la licenciatura en Cs. de la Computación de FAMAF - UNC
 
 
-
-<!--
-### Built With
-
-* []()
--->
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-Para tener una copia local funcional, segui los siguientes pasos:
-
 ### Instalacion
 Clone the repo:
 ```sh
 git clone https://github.com/NazaGara/clustering-tm.git
-   ```
+```
 ### Requisitos
 
 Para instalar las librerias necesarias, ejecuta el comando:
 ```sh
-pip3 install -r requirements.txt
+pip install jupyter
+pip install -r requirements.txt
 ```
 
 
-<!-- USAGE EXAMPLES -->
 ## Uso
 
-<!--Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.-->
+Para utilizarlo, se puede colocar en un google colab y ejecutarlo, o por 
+consola ejecutar:
+
+```sh
+jupyter-notebook clustering.ipynb
+```
+
+## Metodologia
+
+La forma de realizarlo fue ... WIP
 
 
-<!-- LICENSE -->
+
 ## Licencia
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
 
-<!-- CONTACT -->
+
 ## Contacto
 
-Nazareno Garagiola - [@nazagara99](https://twitter.com/nazagara99)
+Nazareno Garagiola - [Twitter](https://twitter.com/nazagara99)
 
 Project Link: [https://github.com/NazaGara/clustering-tm](https://github.com/NazaGara/clustering-tm)
 
 
 
-<!-- ACKNOWLEDGEMENTS -->
-## Agradecimientos
 
-* []()
-* []()
-* []()
-
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [license-shield]: https://img.shields.io/github/license/NazaGara/repo.svg?style=for-the-badge
 [license-url]: https://github.com/NazaGara/clustering-tm/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
