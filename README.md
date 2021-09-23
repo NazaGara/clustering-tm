@@ -21,7 +21,7 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
 
 
 
@@ -71,41 +71,31 @@ pip install -r requirements.txt
 
 ## Uso
 
-Para utilizarlo, se puede colocar en un google colab y ejecutarlo, o por 
-consola ejecutar:
+Para utilizarlo, recomiendo subirlo a [Google Colab](https://colab.research.google.com/notebooks/intro.ipynb) y ejecutarlo, o por consola ejecutar:
 
 ```sh
 jupyter-notebook clustering.ipynb
 ```
 
 ## Metodologia
+WIP
 
-La forma de realizarlo fue ... WIP
 ### Preproceso
+WIP
 
 ### Clustering
+WIP
 
 ### Obtenido vs Esperado
-
-### Métricas
+WIP
 
 ## Licencia
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 
-
-
 ## Contacto
 
-Nazareno Garagiola - [Twitter](https://twitter.com/nazagara99)
+* [Twitter](https://twitter.com/nazagara99)
 
-Project Link: [https://github.com/NazaGara/clustering-tm](https://github.com/NazaGara/clustering-tm)
-
-
-
-
-[license-shield]: https://img.shields.io/github/license/NazaGara/repo.svg?style=for-the-badge
-[license-url]: https://github.com/NazaGara/clustering-tm/blob/main/LICENSE
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/nazareno-garagiola/
+* [LinkedIn](https://linkedin.com/in/nazareno-garagiola/)
