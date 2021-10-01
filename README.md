@@ -84,7 +84,7 @@ Con el objetivo de poder hacer clustering a las palabras del corpus "lavoztextod
 Es importante aclarar que se tomaron algunas decisiones de diseño con respecto a que tipo de palabras nos interesaban, estas decisiones son:
 * Se toman los primeros 0.5 millones - 2 caracteres del corpus, esto porque coincide con un fin de parrafo y tambien porque tomar un numero mayor enlentecia las pruebas.
 * Usamos los lemas de las palabras, esto para simplificar el problema y tener mas cantidad de caracteristicas de cada lema.
-* Como minima cantidad de veces que los lemas deban aparecer tome el valor 40 (variable MIN_FREQ), ya que me daba alrededor de 200 lemas a clusterizar. 
+* Como minima cantidad de veces que los lemas deban aparecer tome el valor 50 (variable MIN_FREQ), ya que me daba alrededor de 200 lemas a clusterizar. 
 
 A continuación, explico como fue la exploración de las combinaciones y como cada etapa fue desarrollandose.
 
