@@ -112,6 +112,12 @@ for token in doc:
 counter_lemma = Counter(lemmas)
 ```
 
+Defino una funcion que uso para poder filtrar las palabras que cumplen el requisitos descritos mas arriba:
+```python 
+def word_filter(token):
+  return (not token.is_alpha) or (token.is_digit) or counter_lemma[token.lemma_] < MIN_FREQ 
+```
+
 En las primeras iteraciones del metodo tomamos algunos atributos de los token que procesa Spacy y guardandolos en diferentes diccionarios. Al comienzo, los atributos que tome eran: pos_ (part of speech), tag (fine-grained part of speech)
 
 ```python
@@ -127,7 +133,61 @@ for token in doc:
   pos[word][token.pos_] += 1
 ```
 
-Y con estos nuevos diccionarios
+A medida que
+
+
+
+Incremente la cantidad de caracteristicas con triplas de dependencias.
+```python
+  tripla = (f"obj: {token.text} - dep : {token.dep_} - root: {doc[i+1].head.lemma_}")
+  if not tripla in triplas[word].keys():
+    triplas[word][tripla] = 0
+  triplas[word][tripla] += 1
+```
+
+Luego, me interesaba poder obtener informacion sobre el contexto de cada palabra. Para esto tenia dos formas de hacerlo:
+1. Consistia en tomar un contexto inmediato de cada palabra, viendo los lemmas de las palabras anteriores y posteriores.
+2. La otra opcion era la de tomar dos contextos diferentes, uno mas cercano a la palabra objetivo donde solo me interesan palabras que no sean stopwords y otro mas amplio, donde solo las palabras que tambien pasaban el filtro.
+
+Probe ambos metodos, y el segundo traia mejores resultados, ya que tenia dos tamaños de ventana para probar y podia hacer asociaciones de las palabras ignorando las stopwords y buscandole mas significado a cada palabra.
+
+```python
+def immediate_related_words(span):
+    tokens = list(filter(not_a_stopword, span))
+    return list(map(lambda token: token.lemma_, tokens))
+
+def keywords_in(span):
+    tokens = list(filter(
+        lambda token: not word_filter(token) and not_a_stopword(token), span))
+    return list(map(lambda token: token.lemma_, tokens))
+```
+
+```python
+
+close_lft, close_rgt = i-close_window, i+close_window
+if not (close_lft <= 0 and close_rgt >= len(doc)):
+imm_related_words = immediate_related_words(doc[close_lft:close_rgt]) if not token.is_sent_start else immediate_related_words(doc[i:close_rgt])
+for w in imm_related_words:
+  if w == word: continue
+  if not w in close_context[word].keys():
+    close_context[word][w] = 0
+  close_context[word][w] += 1
+
+large_lft, large_rgt = i-large_window, i+large_window
+if not (large_lft <= 0 and large_rgt >= len(doc)):
+  keywords_in_context = keywords_in(doc[large_lft: large_rgt]) if not token.is_sent_start else keywords_in(doc[i: large_rgt])
+  for w in keywords_in_context:
+    if w == word: continue
+    if not w in large_context[word].keys():
+      large_context[word][w] = 0
+    large_context[word][w] += 1
+
+```
+
+
+
+
+
 
 ### Clustering
 WIP
