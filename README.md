@@ -86,10 +86,48 @@ Es importante aclarar que se tomaron algunas decisiones de diseño con respecto 
 * Usamos los lemas de las palabras, esto para simplificar el problema y tener mas cantidad de caracteristicas de cada lema.
 * Como minima cantidad de veces que los lemas deban aparecer tome el valor 50 (variable MIN_FREQ), ya que me daba alrededor de 200 lemas a clusterizar. 
 
+Use [Spacy](https://spacy.io/) para poder analizar y estudiar el corpus:
+```python
+f = open("lavoztextodump.txt", 'r')
+text = f.read()[:500000-2] 
+#...
+nlp = spacy.load("es_core_news_md", vectores=False, entity=False)
+```
+
+Spacy nos tokeniza cada palabra del corpus y estos nos permite obtener diferentes atributos sobre cada token, atributos que usaremos para poder sacar carateristicas de las palabras en la etapa de preproceso.
+
 A continuación, explico como fue la exploración de las combinaciones y como cada etapa fue desarrollandose.
 
 ### Preproceso
-WIP
+
+El objetivo para el preproceso del texto, es el de poder recolectar caracteristicas sobre cada palabra a estudiar, que sirvan para poder definir esta palabra.
+Primero, contamos la cantidad de lemas para poder definir un minimo de cantidad de palabras a usar:
+```python
+from collections import Counter
+lemmas = []
+for token in doc:
+  if len(token) > 1 and token.is_alpha:
+    lemmas.append(token.lemma_.lower())
+
+counter_lemma = Counter(lemmas)
+```
+
+En las primeras iteraciones del metodo tomamos algunos atributos de los token que procesa Spacy y guardandolos en diferentes diccionarios. Al comienzo, los atributos que tome eran: pos_ (part of speech), tag (fine-grained part of speech)
+
+```python
+#ejemplo para el part of speech (pos_)
+for token in doc:
+  if word_filter(token): continue
+  pos[word] = {}
+#...
+for token in doc:
+  if word_filter(token): continue
+  if not token.pos_ in pos[word].keys():
+    pos[word][token.pos_] = 0
+  pos[word][token.pos_] += 1
+```
+
+Y con estos nuevos diccionarios
 
 ### Clustering
 WIP
