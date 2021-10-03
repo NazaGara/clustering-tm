@@ -84,7 +84,7 @@ Con el objetivo de poder hacer clustering a las palabras del corpus "lavoztextod
 Es importante aclarar que se tomaron algunas decisiones de diseño con respecto a que tipo de palabras nos interesaban, estas decisiones son:
 * Se toman los primeros 0.5 millones - 2 caracteres del corpus, esto porque coincide con un fin de parrafo y tambien porque tomar un numero mayor enlentecia las pruebas.
 * Usamos los lemas de las palabras, esto para simplificar el problema y tener mas cantidad de caracteristicas de cada lema.
-* Como minima cantidad de veces que los lemas deban aparecer tome el valor 50 (variable MIN_FREQ), ya que me daba alrededor de 200 lemas a clusterizar. 
+* Como minima cantidad de veces que los lemas deban aparecer tome el valor 35 (variable MIN_FREQ), ya que me daba alrededor de 200 lemas a clusterizar. 
 
 Use [Spacy](https://spacy.io/) para poder analizar y estudiar el corpus:
 ```python
@@ -253,10 +253,39 @@ def sklearn_clustering(k, matrix):
 ```
 
 Llamo ambas funciones, con numero fijo de clusters. Podemos ver los resultados usando la funcion `show_clusters()`.
+```python
+NUM_CLUSTERS = 30
+ntlk_cluster =  ntlk_clustering(NUM_CLUSTERS, reduced_matrix)
+sk_cluster = sklearn_clustering(NUM_CLUSTERS, reduced_matrix)
+show_clusters(NUM_CLUSTERS)
+```
+
+### Embeddings: LSA y t-SNE
 
 
-### LSA y Embbedings
-WIP
+Para aplicar embeddings a los datos obtenidos, me base en la implementacion de sklearn del metodo de LSA (Latent semantic analysis) [TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html) 
+
+```python
+from sklearn.decomposition import TruncatedSVD
+
+def lsa_reduction(matrix):
+    svd = TruncatedSVD(n_components=100, n_iter=5)
+    lsa_data = svd.fit_transform(X=normed_matrix)
+    return lsa_data
+```
+
+Para poder verlo visualmente a los clusters, aplicamos el metodo de t-SNE: [TSNE](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)
+
+
+```python
+from sklearn.manifold import TSNE
+
+def tsne_reduction(matrix):
+    tsne = TSNE(n_components=2, random_state=0)
+    tsne_data = tsne.fit_transform(reduced_matrix)
+    return tsne_data
+```
+
 
 ### Obtenido vs Esperado
 WIP
