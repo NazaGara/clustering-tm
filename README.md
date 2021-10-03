@@ -121,7 +121,7 @@ def word_filter(token):
 En las primeras iteraciones del metodo tomamos algunos atributos de los token que procesa Spacy y guardandolos en diferentes diccionarios. Al comienzo, los atributos que tome eran: pos_ (part of speech), tag (fine-grained part of speech)
 
 ```python
-#ejemplo para el part of speech (pos_)
+#ejemplo para el part of speech, analogo con tag.
 for token in doc:
   if word_filter(token): continue
   pos[word] = {}
@@ -132,10 +132,6 @@ for token in doc:
     pos[word][token.pos_] = 0
   pos[word][token.pos_] += 1
 ```
-
-A medida que
-
-
 
 Incremente la cantidad de caracteristicas con triplas de dependencias.
 ```python
@@ -163,7 +159,6 @@ def keywords_in(span):
 ```
 
 ```python
-
 close_lft, close_rgt = i-close_window, i+close_window
 if not (close_lft <= 0 and close_rgt >= len(doc)):
 imm_related_words = immediate_related_words(doc[close_lft:close_rgt]) if not token.is_sent_start else immediate_related_words(doc[i:close_rgt])
@@ -184,12 +179,83 @@ if not (large_lft <= 0 and large_rgt >= len(doc)):
 
 ```
 
+Finalmente, agrupo todas las caracteristicas de cada palabra en un unico diccionario:
+```python
+for token in doc:
+  if word_filter(token): continue
+  word = token.lemma_
+  feats[word] = {**tag[word], **pos[word], **triplas[word], **large_context[word], **close_context[word], **countable[word]}
+```
+
+<!--Aca hay que decir lo del countable!-->
+
+Ahora si, con estas 5 caracteristicas ya tenia informacion sobre cada palabra y pase a la siguiente etapa de vectorización.
 
 
+### Vectorización
 
+La parte de vectorización consiste en poder traducir estas caracteristicas que recolectamos en el preproceso en vectores y matrices para poder calcular distancias entre ellas.
 
+Use [DictVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.DictVectorizer.html) de sklearn, que mediante un arreglo de diccionarios (tenemos un diccionario por cada palabra en feats[palabra]) nos devuelve una matriz con todas estas caracteristicas ya traducidas. Ademas, voy guardando un diccionario con las palabras que estudiamos y su columna en la matriz.
+```python
+from sklearn.feature_extraction import DictVectorizer
+vectorizer = DictVectorizer(sparse=False)
+features, key_words, wid = [], {}, 0
+for word in feats:
+  key_words[word] = wid
+  wid += 1
+  features.append(feats[word])
+matrix = vectorizer.fit_transform(X=features)
+```
+
+Pero esta matriz obtenida tiene dimensiones realmente grandes, por lo cual queremos normalizar estos vectores y reducir aquellas columnas (es decir, caracteristicas) que no contengan informacion muy especial, por ejemplo, columnas que sean todas nulas o que todas tengan valores similares.
+
+Tambien uso la implementacion de sklearn para poder normalizar y fijarle un limite a la varianza de cada valor:
+
+```python
+from sklearn.preprocessing import normalize
+from sklearn.feature_selection import VarianceThreshold
+VARIANCE_THRESHOLD = 1e-7
+selector = VarianceThreshold(threshold=VARIANCE_THRESHOLD)
+normed_matrix = normalize(matrix, axis=1, norm='l1')
+reduced_matrix = selector.fit_transform(normed_matrix)
+```
+
+Al final de la etapa de vectorizacion, tenemos una matriz con valores numericos sobre las caracteristicas, y con un tamaño reducido. Esta matriz reducida, sera la que usamos para poder hacer agrupar las palabras y hacer el clustering.
 
 ### Clustering
+
+Para hacer el clustering use dos implementaciones del algoritmo:
+1. [KMeansClusterer]((https://tedboy.github.io/nlps/generated/generated/nltk.cluster.KMeansClusterer.html)) de ntlk, con distancia coseno
+2. [KMeans](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) de sklearn, con distancia euclidea
+
+Notar que si bien las distancia utilizadas para ambos algoritmos son diferentes, los resultados no varian mucho, ya que como los vectores estan normalizados, ambas distancias son similares.
+
+Implemente dos funciones, tienen los mismos parametros:
+* k : la cantidad de clusters a realizar
+* matrix: la matriz con los datos reducidos
+
+Ambas retornan en una lista los labels o numero de clusters de cada palabra.
+
+```python
+from nltk.cluster import kmeans, cosine_distance
+from sklearn.cluster import KMeans
+
+def ntlk_clustering(k, matrix):
+  clusterer = kmeans.KMeansClusterer(num_means=k, distance=cosine_distance, avoid_empty_clusters=True)
+  clusters = clusterer.cluster(matrix, assign_clusters=True)
+  return clusters
+
+def sklearn_clustering(k, matrix):
+  clusterer = KMeans(n_clusters=k)
+  clusterer.fit(X=matrix)
+  return clusterer.labels_
+```
+
+Llamo ambas funciones, con numero fijo de clusters. Podemos ver los resultados usando la funcion `show_clusters()`.
+
+
+### LSA y Embbedings
 WIP
 
 ### Obtenido vs Esperado
