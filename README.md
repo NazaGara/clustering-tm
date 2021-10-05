@@ -37,15 +37,16 @@
 <!-- TABLE OF CONTENTS -->
 <details open="open">
   <summary><h2 style="display: inline-block">Tabla de contenidos</h2></summary>
-  <ol>
+  <ul>
     <li><a href="#about-the-project">Proyecto 1: Clustering</a></li>
     <li><a href="#instalacion">Instalacion</a></li>
     <li><a href="#requisitos">Requisitos</a></li>
     <li><a href="#uso">Uso</a></li>
     <li><a href="#metodologia">Metodologia</a></li>
+    <li><a href="#resultados">Resultados</a></li>
     <li><a href="#licencia">Licencia</a></li>
     <li><a href="#contacto">Contacto</a></li>
-  </ol>
+  </ul>
 </details>
 
 
@@ -192,7 +193,7 @@ for token in doc:
 Ahora si, con estas 5 caracteristicas ya tenia informacion sobre cada palabra y pase a la siguiente etapa de vectorización.
 
 
-### Vectorización
+### Vectorizacion
 
 La parte de vectorización consiste en poder traducir estas caracteristicas que recolectamos en el preproceso en vectores y matrices para poder calcular distancias entre ellas.
 
@@ -286,12 +287,41 @@ def tsne_reduction(matrix):
     return tsne_data
 ```
 
+Para poder ver visualmente los datos, creamos un dataframe de Pandas, donde en cargamos la coordenada en x, la coordenada en y (obtenida usando `tsne_reduction`), el valor del cluster y la palabra. Junto con MatplotLib hacemos un scatterplot del dataframe creado.
 
-### Obtenido vs Esperado
-WIP
+![clusters](https://imgur.com/ZeskT3J.png)
 
-### Conclusiones
-WIP
+## Resultados
+
+Para poder visualizar los resultados obtenidos, prepare algunas funciones a usar, estas son:
+* `show_clusters(k)`
+* `cluster_of(word)`
+* `same_cluster(word1, word2)`
+
+Con estas funciones, y una lista de palabras `test_words` se ve en pantalla a los clusters correspondiente para cada palabra:
+```python
+#stopwords1
+results['el']
+#empleos
+results["intendente"]
+#numeros
+results['mil']
+#verbos
+results['lograr']
+```
+
+Luego de probar diferentes configuraciones de tamaños de ventana y tamaño de clusters, en base a la cantidad de palabras, los "mejores" resultados se obtuvieron con las configuraciones siguientes:
+
+1. close_window = 1, large_window = 7,  #clusters = 40 
+1. close_window = 2, large_window = 7,  #clusters = 40
+1. close_window = 3, large_window = 15, #clusters = 40
+
+Estos resultados fueron evaluados viendo manualmente los clusters obtenidos de la palabras.
+
+Podemos ver que el procedimiento genera agrupaciones de palabras correctamente, pero que aun se puede mejorar mas. Para hacer que el modelo funcione mejor, habria que seguir probando con las caracteristicas a tomar que resulto en lo que mas influye en los clusters obtenidos.
+
+De aquellas palabras que 
+
 
 
 ## Licencia
