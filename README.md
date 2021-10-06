@@ -263,7 +263,6 @@ show_clusters(NUM_CLUSTERS)
 
 ### Embeddings: LSA y t-SNE
 
-
 Para aplicar embeddings a los datos obtenidos, me base en la implementacion de sklearn del metodo de LSA (Latent semantic analysis) [TruncatedSVD](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.TruncatedSVD.html) 
 
 ```python
@@ -299,18 +298,8 @@ Para poder visualizar los resultados obtenidos, prepare algunas funciones a usar
 * `plot_cluster_of(word)`
 * `same_cluster(word1, word2)`
 
+Con estas funciones, y una lista de palabras `test_words` en la notebook podemos ver los resultados.
 
-Con estas funciones, y una lista de palabras `test_words` se ve en pantalla a los clusters correspondiente para cada palabra:
-```python
-#stopwords1
-results['el']
-#empleos
-results["intendente"]
-#numeros
-results['mil']
-#verbos
-results['lograr']
-```
 
 Luego de probar diferentes configuraciones de tamaños de ventana y tamaño de clusters, en base a la cantidad de palabras, los "mejores" resultados se obtuvieron con las configuraciones siguientes:
 
@@ -322,7 +311,18 @@ Estos resultados fueron evaluados viendo manualmente los clusters obtenidos de l
 
 Podemos ver que el procedimiento genera agrupaciones de palabras correctamente, pero que aun se puede mejorar mas. Para hacer que el modelo funcione mejor, habria que seguir probando con las caracteristicas a tomar que resulto en lo que mas influye en los clusters obtenidos.
 
-De aquellas palabras que WIP...
+De una corrida, obtenemos los clusters:
+`['mucho', 'poco']` o ` ['ser', 'estar', 'haber', 'parecer', 'poder', 'deber']`
+los cuales tienen mucho sentido que se agrupen, ya que sus palabras significan cosas similares, pero tambien obtenemos el cluster: `['año', 'problema', 'día', 'punto', 'sector', 'funcionario', 'padre', 'niño', 'peso', 'empresario', 'fondo', 'ministerio']` donde podemos ver que hay palabras que tengan sentido que esten juntas (`'padre','niño'` o `'dia','año'`) pero entre estos subconjuntos del cluster no se encuentra una relacion semantica. 
+
+Por ejemplo: los pares `('padre','niño')` con `('peso','fondo')` no tienen relacion entre los sentidos de las palabras del otro par, pero si entre ellas, por lo cual esta bien que esten en un cluster de a pares, pero no con otros pares.
+
+Tambien podemos ver como los resultados obtenidos dependen corpuse trabajdo, del contexto procesado y como lo procesamos y por ejemplo, ejecutando(en una corrida): `cluster_of('mujer')` obtuvimos:
+
+`['mujer', 'vez', 'vida', 'manera', 'medir', 'ley', 'posibilidad', 'familia', 'protestar', 'situación', 'partir', 'provincia', 'capital', 'gestión', 'mayoría', 'ciudad', 'reunión', 'empresa', 'actividad', 'asamblea', 'historia', 'decisión', 'sociedad', 'semana', 'campaña', 'organización', 'democracia', 'justicia', 'nación']`
+
+Del cual podemos ver que esta agrupada con palabras como 'ley' o 'gestión' las cuales se hacen presentes en el mismo cluster ya que en el corpus se encuentran noticias que hacen referencia al Proyecto de Ley de Interrupción Voluntaria del Embarazo, y como el modelo detecta los contextos de las palabras es capaz de agrupar dichas palabras.
+
 
 ### Trabajo Futuro
 
