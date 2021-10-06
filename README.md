@@ -289,14 +289,16 @@ def tsne_reduction(matrix):
 
 Para poder ver visualmente los datos, creamos un dataframe de Pandas, donde en cargamos la coordenada en x, la coordenada en y (obtenida usando `tsne_reduction`), el valor del cluster y la palabra. Junto con MatplotLib hacemos un scatterplot del dataframe creado.
 
-![clusters](https://imgur.com/ZeskT3J.png)
+![clusters](https://imgur.com/7qQApCo.png)
 
 ## Resultados
 
 Para poder visualizar los resultados obtenidos, prepare algunas funciones a usar, estas son:
 * `show_clusters(k)`
 * `cluster_of(word)`
+* `plot_cluster_of(word)`
 * `same_cluster(word1, word2)`
+
 
 Con estas funciones, y una lista de palabras `test_words` se ve en pantalla a los clusters correspondiente para cada palabra:
 ```python
@@ -320,9 +322,14 @@ Estos resultados fueron evaluados viendo manualmente los clusters obtenidos de l
 
 Podemos ver que el procedimiento genera agrupaciones de palabras correctamente, pero que aun se puede mejorar mas. Para hacer que el modelo funcione mejor, habria que seguir probando con las caracteristicas a tomar que resulto en lo que mas influye en los clusters obtenidos.
 
-De aquellas palabras que 
+De aquellas palabras que WIP...
 
+### Trabajo Futuro
 
+Entre las cosas que se no llegue a probar estan:
+
+* Jugar con la matriz obtenida luego de aplicar LSA para hacer clustering.
+* Intentar identificar caracteristicas como dimensiones de las matrices.
 
 ## Licencia
 
